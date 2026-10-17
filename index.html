@@ -1,0 +1,264 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Banco NRF | Demo de usabilidad</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Saltar al contenido principal</a>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">NRF</span>
+      <div>
+        Banco <b>NRF</b>
+        <small>Demo académica de usabilidad</small>
+      </div>
+    </div>
+
+    <div class="tools" aria-label="Opciones de visualización">
+      <button id="textToggle" type="button"
+        aria-pressed="false">A+ Texto grande</button>
+      <button id="contrastToggle" type="button"
+        aria-pressed="false">Alto contraste</button>
+    </div>
+  </header>
+
+  <main id="main" class="shell">
+    <section class="welcome" aria-labelledby="welcomeTitle">
+      <div>
+        <p class="eyebrow">PORTAL PERSONAL</p>
+        <h1 id="welcomeTitle">¡Hola! Bienvenido a tu banco.</h1>
+        <p class="muted">
+          Explora una interfaz diseñada para facilitar las tareas
+          y mejorar la accesibilidad.
+        </p>
+      </div>
+      <span class="demo">Entorno de demostración</span>
+    </section>
+
+    <section class="balance" aria-label="Saldo ficticio">
+      <div>
+        <p>Saldo disponible <small>(ficticio)</small></p>
+        <strong>$ 2.450.000 <small>COP</small></strong>
+        <small>Última actualización: ahora</small>
+      </div>
+      <span class="balance-icon" aria-hidden="true">▤</span>
+    </section>
+
+    <section aria-labelledby="actionsTitle">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">ACCIONES PRINCIPALES</p>
+          <h2 id="actionsTitle">¿Qué necesitas hacer?</h2>
+        </div>
+        <small class="muted">Selecciona una opción</small>
+      </div>
+
+      <div class="actions">
+        <button class="action selected" type="button"
+          data-action="transfer" aria-pressed="true">
+          <span class="action-icon" aria-hidden="true">↗</span>
+          <span>
+            <b>Transferir dinero</b>
+            <small>Simular un envío a otra cuenta</small>
+          </span>
+          <span class="arrow" aria-hidden="true">›</span>
+        </button>
+
+        <button class="action" type="button"
+          data-action="movements" aria-pressed="false">
+          <span class="action-icon violet" aria-hidden="true">▤</span>
+          <span>
+            <b>Consultar movimientos</b>
+            <small>Revisar operaciones ficticias</small>
+          </span>
+          <span class="arrow" aria-hidden="true">›</span>
+        </button>
+
+        <button class="action" type="button"
+          data-action="pay" aria-pressed="false">
+          <span class="action-icon orange" aria-hidden="true">✓</span>
+          <span>
+            <b>Pagar servicio</b>
+            <small>Consultar la demostración</small>
+          </span>
+          <span class="arrow" aria-hidden="true">›</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="layout" aria-label="Área de trabajo">
+      <section class="panel" id="transferPanel"
+        aria-labelledby="transferTitle">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">OPERACIÓN DE PRUEBA</p>
+            <h2 id="transferTitle">Transferir dinero</h2>
+          </div>
+          <span class="pill">Sin movimiento real</span>
+        </div>
+
+        <p class="muted">
+          Completa los datos para simular una transferencia.
+          No se envía dinero ni se conecta con una entidad financiera.
+        </p>
+
+        <form id="transferForm" novalidate>
+          <div class="field">
+            <label for="destination">Cuenta de destino</label>
+            <input id="destination" name="destination"
+              type="text" autocomplete="off"
+              placeholder="Ej. Cuenta de ahorros de Ana"
+              aria-describedby="destHelp destError" required>
+            <small id="destHelp" class="muted">
+              Usa un nombre ficticio. No ingreses datos bancarios reales.
+            </small>
+            <small id="destError" class="error" hidden></small>
+          </div>
+
+          <div class="field">
+            <label for="amount">Valor a transferir (COP)</label>
+            <input id="amount" name="amount" type="number"
+              inputmode="numeric" min="1000" max="2450000"
+              step="1000" placeholder="Ej. 50000"
+              aria-describedby="amountHelp amountError" required>
+            <small id="amountHelp" class="muted">
+              Mínimo $1.000. Saldo ficticio: $2.450.000.
+            </small>
+            <small id="amountError" class="error" hidden></small>
+          </div>
+
+          <div class="notice">
+            <b aria-hidden="true">ⓘ</b>
+            <span>
+              Revisa siempre el destinatario y el valor antes de confirmar.
+              Esta aplicación es una demostración académica.
+            </span>
+          </div>
+
+          <div class="form-actions">
+            <button class="secondary" id="clearForm"
+              type="button">Limpiar</button>
+            <button class="primary" type="submit">
+              Revisar transferencia →
+            </button>
+          </div>
+
+          <div id="feedback" class="feedback"
+            role="status" aria-live="polite"
+            aria-atomic="true" tabindex="-1" hidden></div>
+        </form>
+      </section>
+
+      <aside class="panel side" aria-labelledby="principlesTitle">
+        <h2 id="principlesTitle">Principios aplicados</h2>
+        <ul>
+          <li>
+            <b>Lenguaje claro</b>
+            <small>Etiquetas comprensibles y mensajes útiles.</small>
+          </li>
+          <li>
+            <b>Prevención de errores</b>
+            <small>Validación de campos obligatorios.</small>
+          </li>
+          <li>
+            <b>Retroalimentación</b>
+            <small>El sistema explica qué ocurrió.</small>
+          </li>
+          <li>
+            <b>Jerarquía visual</b>
+            <small>El saldo y las acciones destacan.</small>
+          </li>
+          <li>
+            <b>Adaptabilidad</b>
+            <small>Diseño para diferentes pantallas.</small>
+          </li>
+        </ul>
+
+        <div class="keyboard">
+          <b>Prueba de teclado</b>
+          <p>
+            Usa <kbd>Tab</kbd> para recorrer los controles y
+            <kbd>Enter</kbd> o <kbd>Espacio</kbd> para activarlos.
+          </p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="panel movements" id="movementsPanel"
+      aria-labelledby="movementsTitle" hidden>
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">ACTIVIDAD RECIENTE</p>
+          <h2 id="movementsTitle">Movimientos de ejemplo</h2>
+        </div>
+        <span class="pill">Datos ficticios</span>
+      </div>
+
+      <ul class="movement-list">
+        <li>
+          <span class="income" aria-hidden="true">+</span>
+          <div>
+            <b>Abono de ejemplo</b>
+            <small>Hoy · 9:15 a. m.</small>
+          </div>
+          <strong>+$ 150.000</strong>
+        </li>
+        <li>
+          <span class="expense" aria-hidden="true">−</span>
+          <div>
+            <b>Compra de ejemplo</b>
+            <small>Ayer · 4:40 p. m.</small>
+          </div>
+          <strong>−$ 32.000</strong>
+        </li>
+        <li>
+          <span class="expense" aria-hidden="true">−</span>
+          <div>
+            <b>Pago de servicio ficticio</b>
+            <small>10 oct. · 11:20 a. m.</small>
+          </div>
+          <strong>−$ 68.000</strong>
+        </li>
+      </ul>
+    </section>
+
+    <p class="footnote">
+      <b>Objetivo académico:</b> observar cómo las decisiones de diseño
+      afectan la comprensión, la accesibilidad y la facilidad de uso.
+      Todos los datos son ficticios.
+    </p>
+  </main>
+
+  <footer>
+    <span>Banco NRF · Proyecto académico de Diseño de Interfaces</span>
+    <span>HTML5 · CSS3 · JavaScript</span>
+  </footer>
+
+  <dialog id="confirmDialog" aria-labelledby="dialogTitle"
+    aria-describedby="summary dialogNote">
+    <form method="dialog" id="dialogForm">
+      <p class="eyebrow">CONFIRMACIÓN</p>
+      <h2 id="dialogTitle">Revisa los datos</h2>
+      <p id="summary"></p>
+      <p class="dialog-note" id="dialogNote">
+        Simulación académica: no se enviará dinero.
+      </p>
+      <div class="form-actions">
+        <button class="secondary" value="cancel">
+          Volver y modificar
+        </button>
+        <button class="primary" id="confirmButton" value="confirm">
+          Confirmar simulación
+        </button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>
